@@ -1,0 +1,68 @@
+.test {
+    border: 1px solid black;
+}
+
+body {
+    padding: 0.5%;
+    height: 100%;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chat {
+    flex-grow: 1;
+    overflow:auto;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.bubble-right {
+    margin-left: auto;
+    /* text-align: right; */
+    background-color: lightgreen;
+}
+
+.time-right {
+    text-align: right;
+}
+
+.chatbubble {
+    min-width: 15%;
+    max-width: 60%;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px gray;
+    border: 1px;
+    border-style: groove;
+    word-wrap: break-word;
+}
+
+.bubble-left {
+    margin-right: auto;
+    background-color: lightblue;
+}
+
+.contact-selected {
+    background-color: aquamarine;
+}
+
+.contact-name {
+    font-size: 1.25rem;
+    padding-left: 1rem;
+}

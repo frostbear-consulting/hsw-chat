@@ -1,0 +1,135 @@
+<html>
+
+<head>
+    <title>Das ist meine Website</title>
+    <link rel="stylesheet" href="bulma.min.css" />
+    <link rel="stylesheet" href="hsw.css">
+    <link rel="stylesheet" href="./fontawesome/css/fontawesome.min.css" />
+    <script src="./fontawesome/js/all.min.js"></script>
+</head>
+
+<script>
+    function h(tagName, attributes, children) {
+        let element = document.createElement(tagName);
+
+        // Set attributes
+        Object.keys(attributes)
+            .forEach(key => {
+                element.setAttribute(key, attributes[key]);
+            });
+
+        // Append/set children
+        if ('string' === typeof children) {
+            element.innerText = children;
+        } else if (Array.isArray(children)) {
+            children.forEach(child => !!child && element.appendChild(child));
+        } else if (!!children) {
+            element.appendChild(children);
+        }
+
+        return element;
+    }
+
+
+    function createCard(side = 'left', content, time) {
+        const newButton = h('div', {
+            class: `chatbubble bubble-${side}`
+        }, [
+            h('time', { class: 'is-size-7' }, time),
+            h('div', { class: 'bubble-content' }, content)
+        ]);
+
+        document.getElementsByClassName('chat')[0].appendChild(newButton);
+    }
+
+    function sendMessage() {
+        const text = document.getElementById('message').value;
+
+        if (text === '') {
+            return;
+        }
+
+        const time = `${new Date().getHours()}:${new Date().getMinutes()}`
+        createCard('right', text, time);
+    }
+
+    function handleInput(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+            e.target.value = '';
+
+            let chatBox = document.getElementsByClassName('chat')[0];
+
+            chatBox.scrollTo(0, chatBox.scrollHeight);
+        }
+    }
+</script>
+
+<body>
+    <div class="columns block h-full">
+        <div class="column is-one-quarter">
+            <nav class="panel">
+                <p class="panel-heading">
+                    Kontakte
+                </p>
+                <div class="control has-icons-left">
+                    <input type="text" class="input" placeholder="Search">
+                    <span class="icon is-left">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <a href="" class="panel-block contact-selected">
+                    <figure class="image is-64x64">
+                        <img src="./pic-placeholder.jpg" alt="">
+                    </figure>
+                    <p class="contact-name">
+                        Claire Grube
+                    </p>
+                </a>
+                <a href="" class="panel-block">
+                    <figure class="image is-64x64">
+                        <img src="./pic-placeholder.jpg" alt="">
+                    </figure>
+                    <p class="contact-name">
+                        Rainer Zufall
+                    </p>
+                </a>
+            </nav>
+        </div>
+        <div class="column">
+            <div class="right">
+                <div class="box test header has-text-centered is-size-5">Claire Grube</div>
+                <div class="box test chat flex">
+                    <div class="chatbubble bubble-left">
+                        <time class="is-size-7">11:13</time>
+                        <div class="bubble-content">Text!</div>
+                    </div>
+                    <div class="chatbubble bubble-right">
+                        <time class="is-size-7">11:13</time>
+                        <div class="bubble-content">
+                            right!
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="field has-addons w-full">
+                        <p class="control w-full">
+                            <input id="message" type="text" class="input" placeholder="Send a message..."
+                                onkeypress="handleInput(event)">
+                        </p>
+                        <p class="control">
+                            <button class="button" onclick="sendMessage()">
+                                <span class="icon">
+                                    <i class="fa-regular fa-paper-plane"></i>
+                                </span>
+                            </button>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
